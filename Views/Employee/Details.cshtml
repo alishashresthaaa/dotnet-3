@@ -1,0 +1,29 @@
+﻿@model Assignment3.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee Details"; // Title of the page
+}
+
+<h1>Employee Details</h1>
+
+<hr />
+
+<!-- Display the details of the selected employee -->
+<div>
+    <h3>First Name: @Model.FirstName</h3> <!-- Display Employee's First Name -->
+    <h3>Last Name: @Model.LastName</h3>  <!-- Display Employee's Last Name -->
+    <h3>Job Title: @Model.JobTitle</h3>  <!-- Display Employee's Job Title -->
+    <h3>Salary: @Model.Salary.ToString("C")</h3> <!-- Display Employee's Salary, formatted as currency -->
+</div>
+
+<hr />
+
+<!-- Link to go back to the employee list -->
+<a asp-controller="Employee" asp-action="List" class="btn btn-primary">Back to Employee List</a>
+
+<!-- Optionally, you can add an Update button if you want to allow updates directly from the details page -->
+<a asp-controller="Employee" asp-action="Update" asp-route-id="@Model.EmployeeId" class="btn btn-warning">Update Employee</a>
+
+<!-- Optionally, you can add a Delete button here as well -->
+<a asp-controller="Employee" asp-action="Delete" asp-route-id="@Model.EmployeeId" class="btn btn-danger"
+   onclick="return confirm('Are you sure you want to delete this employee?');">Delete Employee</a>

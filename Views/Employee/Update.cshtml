@@ -1,0 +1,56 @@
+﻿@model Assignment3.Models.Employee
+
+@{
+    // Dynamically set the page title based on whether the EmployeeId is 0 (Add) or not (Update)
+    ViewData["Title"] = Model.EmployeeId == 0 ? "Add Employee" : "Update Employee";
+}
+
+<!-- Display the page title dynamically based on the action (Add or Update) -->
+<h2>@ViewData["Title"]</h2>
+
+<!-- Begin the form to either add or update an employee -->
+<form asp-action="@(Model.EmployeeId == 0 ? "Add" : "Update")" method="post">
+
+    <!-- First Name Input Field -->
+    <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <!-- Input field for First Name. Binds to the "FirstName" property of the Employee model -->
+        <input asp-for="FirstName" class="form-control" />
+        <!-- Validation error message for the First Name field (if any) -->
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <!-- Last Name Input Field -->
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <!-- Input field for Last Name. Binds to the "LastName" property of the Employee model -->
+        <input asp-for="LastName" class="form-control" />
+        <!-- Validation error message for the Last Name field (if any) -->
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <!-- Job Title Input Field -->
+    <div class="form-group">
+        <label for="JobTitle">Job Title</label>
+        <!-- Input field for Job Title. Binds to the "JobTitle" property of the Employee model -->
+        <input asp-for="JobTitle" class="form-control" />
+        <!-- Validation error message for the Job Title field (if any) -->
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+
+    <!-- Salary Input Field -->
+    <div class="form-group">
+        <label for="Salary">Salary</label>
+        <!-- Input field for Salary. Binds to the "Salary" property of the Employee model -->
+        <input asp-for="Salary" class="form-control" />
+        <!-- Validation error message for the Salary field (if any) -->
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+
+    <!-- Submit Button to Save the Employee (either Add or Update based on EmployeeId) -->
+    <button type="submit" class="btn btn-primary">Save</button>
+
+    <!-- Cancel Button to redirect back to the Employee List page -->
+    <a href="@Url.Action("List", "Employee")" class="btn btn-secondary">Cancel</a>
+</form>
+

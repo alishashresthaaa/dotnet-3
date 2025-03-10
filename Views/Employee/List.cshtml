@@ -1,0 +1,60 @@
+﻿@model List<Assignment3.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employee List"; // Set the title of the page
+}
+
+<h1>Employee List</h1>
+
+<hr />
+
+<!-- Table to display employee data -->
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <!-- Table headers for each column -->
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Job Title</th>
+            <th>Salary</th>
+            <th></th> <!-- Empty cell for the View link -->
+            <th></th> <!-- Empty cell for the Update link -->
+            <th></th> <!-- Empty cell for the Delete link -->
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Loop through the list of employees passed from the controller -->
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <!-- Display the employee details in the table rows -->
+                <td>@employee.FirstName</td> <!-- Employee's first name -->
+                <td>@employee.LastName</td>  <!-- Employee's last name -->
+                <td>@employee.JobTitle</td>  <!-- Employee's job title -->
+                <td>@employee.Salary.ToString("C")</td> <!-- Employee's salary formatted as currency -->
+
+                <td>
+                    <!-- Link to view employee details. It redirects to the 'Details' action with the employee's ID -->
+                    <a asp-controller="Employee" asp-action="Details" asp-route-slug="@employee.Slug">View Details</a>
+
+                </td>
+
+                <td>
+                    <!-- Link to update employee information. It redirects to the 'Update' action with the employee's ID -->
+                    <a asp-controller="Employee"
+                       asp-action="Update"
+                       asp-route-id="@employee.EmployeeId">Update</a>
+                </td>
+
+                <td>
+                    <!-- Link to delete the employee. It triggers the delete action with confirmation -->
+                    <a asp-controller="Employee"
+                       asp-action="Delete"
+                       asp-route-id="@employee.EmployeeId"
+                       onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+                    <!-- The 'confirm()' method in JavaScript will show a confirmation dialog before deleting -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
